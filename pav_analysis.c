@@ -8,7 +8,7 @@ float compute_power(const float *x, unsigned int N) {
         inc += x[n]*x[n];
     }
     
-    float power = 10*log10((1/N)*inc);
+    float power = 10*log10(inc/N);
 
     return power;
 }
@@ -27,11 +27,11 @@ float compute_zcr(const float *x, unsigned int N, float fm) {
     float inc = 0;
 
     for (int n=1; n<N; n++) {
-        if ((x[n]>0 && x[n-1]<0 || x[n]>0 && x[n-1]<0)){
+        if (x[n]*x[n-1] < 0){
             inc++;
         }
     }
 
-    float zcr = (fm/2)*(1/(N-1))*inc;
+    float zcr = (fm/2)*inc/(N-1);
     return zcr;
 }

@@ -7,7 +7,13 @@ FILE *abre_wave(const char *ficWave, float *fm) {
     if ((fpWave = fopen(ficWave, "r")) == NULL) return NULL;
     if (fseek(fpWave, 44, SEEK_SET) < 0) return NULL;
 
-    *fm = 16000;
+    // *fm = 16000;
+
+    int frm;
+    fseek(fpWave, 24, SEEK_SET);
+    fread(&frm, 4, 1, fpWave);
+
+    *fm = frm;
 
     return fpWave;
 }
