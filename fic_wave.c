@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "fic_wave.h"
+#include <string.h>
 #include <errno.h>
 
 FILE *abre_wave(const char *ficWave, float *fm)
@@ -16,7 +17,7 @@ FILE *abre_wave(const char *ficWave, float *fm)
   fread(&nChannels, 2, 1, fpWave);
   if (nChannels > 1)
   {
-    fprintf(stderr, "Error: Señal debe ser de un solo canal (mono)", strerror(errno));
+    printf("Error: Señal debe ser de un solo canal (mono)");
     return NULL;
   }
 
@@ -25,7 +26,7 @@ FILE *abre_wave(const char *ficWave, float *fm)
   fread(&codif, 4, 1, fpWave);
   if (codif != 16)
   {
-    fprintf(stderr, "Error: Señal no codificada con PCM Lineal de 16 bits", strerror(errno));
+    printf("Error: Señal no codificada con PCM Lineal de 16 bits");
     return NULL;
   }
 
