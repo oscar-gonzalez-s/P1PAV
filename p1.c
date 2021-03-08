@@ -39,10 +39,13 @@ int main (int argc, char *argv[]) {
         return -1;
     }
 
+    printf("Frecuencia de muestreo: %.0f Hz\n", fm);
+    printf("Archivo de texto creado.\n");
+
     trm = 0;
     while (lee_wave(buffer, sizeof(*buffer), N, fpWave) == N) {
         for (int n = 0; n < N; n++) x[n] = buffer[n] / (float) (1 << 15);
-        printf("%d\t%f\t%f\t%f\n", trm, compute_power(x, N), compute_am(x, N), compute_zcr(x, N, fm));
+        //printf("%d\t%f\t%f\t%f\n", trm, compute_power(x, N), compute_am(x, N), compute_zcr(x, N, fm));
         fprintf(tablaResultado, "%d\t%f\t%f\t%f\n", trm, compute_power(x, N), compute_am(x, N), compute_zcr(x, N, fm));
         trm += 1;
     }
