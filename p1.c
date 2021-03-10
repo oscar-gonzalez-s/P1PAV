@@ -34,17 +34,14 @@ int main(int argc, char *argv[]) {
 
   txtFileName = argv[2];
   tablaResultado = fopen(txtFileName, "w");
-  if (tablaResultado == NULL) {
-    fprintf(stderr, "Error al abrir el archivo (%s)\n", strerror(errno));
-    return -1;
-  }
 
   trm = 0;
   while (lee_wave(buffer, sizeof(*buffer), N, fpWave) == N) {
     for (int n = 0; n < N; n++)
       x[n] = buffer[n] / (float)(1 << 15);
     printf("%d\t%f\t%f\t%f\n", trm, compute_windowed_power(x, N, fm), compute_am(x, N), compute_zcr(x, N, fm));
-    fprintf(tablaResultado, "%d\t%f\t%f\t%f\n", trm, compute_windowed_power(x, N, fm), compute_am(x, N), compute_zcr(x, N, fm));
+    if (tablaResultado)
+      fprintf(tablaResultado, "%d\t%f\t%f\t%f\n", trm, compute_windowed_power(x, N, fm), compute_am(x, N), compute_zcr(x, N, fm));
     trm += 1;
   }
   fclose(tablaResultado);
