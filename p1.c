@@ -12,9 +12,8 @@ int main(int argc, char *argv[]) {
   int trm;
   float *x;
   short *buffer;
-  char *txtFileName;
   FILE *fpWave;
-  FILE *tablaResultado;
+  FILE *archivoResultados;
 
   if (argc != 2 && argc != 3) {
     fprintf(stderr, "Empleo: %s inputfile [outputfile]\n", argv[0]);
