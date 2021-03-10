@@ -15,8 +15,7 @@ FILE *abre_wave(const char *ficWave, float *fm)
   int nChannels;
   fseek(fpWave, 22, SEEK_SET);
   fread(&nChannels, 2, 1, fpWave);
-  if (nChannels > 1)
-  {
+  if (nChannels > 1) {
     printf("Error: Señal debe ser de un solo canal (mono)");
     return NULL;
   }
@@ -24,8 +23,7 @@ FILE *abre_wave(const char *ficWave, float *fm)
   int codif;
   fseek(fpWave, 16, SEEK_SET);
   fread(&codif, 4, 1, fpWave);
-  if (codif != 16)
-  {
+  if (codif != 16) {
     printf("Error: Señal no codificada con PCM Lineal de 16 bits");
     return NULL;
   }
@@ -39,12 +37,10 @@ FILE *abre_wave(const char *ficWave, float *fm)
   return fpWave;
 }
 
-size_t lee_wave(void *x, size_t size, size_t nmemb, FILE *fpWave)
-{
+size_t lee_wave(void *x, size_t size, size_t nmemb, FILE *fpWave) {
   return fread(x, size, nmemb, fpWave);
 }
 
-void cierra_wave(FILE *fpWave)
-{
+void cierra_wave(FILE *fpWave) {
   fclose(fpWave);
 }
