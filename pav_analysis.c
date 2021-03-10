@@ -55,7 +55,7 @@ float compute_zcr(const float *x, unsigned int N, float fm) {
   float inc = 0;
 
   for (int n=1; n<N; n++) {
-    if (x[n]*x[n-1] < 0)
+    if (x[n]*x[n-1] < 0 || (x[n] == 0 && x[n-1] != 0))
       inc++;
   }
 
